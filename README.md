@@ -48,8 +48,12 @@ from pyspark.sql.context import SQLContext
 /usr/local/spark/bin/spark-submit --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 /home/ubuntu/code/test.py
 ```
 You need to check if the jar file is in your `/usr/local/spark/jars` folder and if the package is able to get. This package works for me now.
-3. Run the job in a distributed way:
+4. To be able to run it on the master nodes, you need to start spark for all node:
+```
+peg service spark-cluster hadoop start
+peg service spark-cluster spark start
+```
+5. Run the job in a distributed way:
 ```
 /usr/local/spark/bin/spark-submit --master spark://ec2-34-215-118-65.us-west-2.compute.amazonaws.com:7077 --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 /home/ubuntu/code/test.py
 ```
-To be able to run it on the master nodes, you need to start spark for all node?
