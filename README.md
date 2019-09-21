@@ -30,3 +30,26 @@ prod = kafka.SimpleProducer(cluster, async=False)
 topic = "hello_topic"
 prod.send_messages(topic, message_you_want_send)
 ```
+For more information, see [https://github.com/dpkp/kafka-python](https://github.com/dpkp/kafka-python)
+### 5. PySpark
+0. Install PySpark: `pip install pyspark`. For more tutorial about spark, see [https://github.com/InsightDataScience/data-engineering-ecosystem/wiki/spark-intro](https://github.com/InsightDataScience/data-engineering-ecosystem/wiki/spark-intro)
+### 6. Kafka + Spark Streaming in python:
+1. The package to import:
+```
+from pyspark import SparkContext
+from pyspark import SparkConf
+from pyspark.streaming import StreamingContext
+from pyspark.streaming.kafka import KafkaUtils
+from pyspark.sql.context import SQLContext
+```
+2. Before run your python file, you need to start your producer so that spark-streaming has something to ingest and process
+3. Run the spark job locally:
+```
+/usr/local/spark/bin/spark-submit --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 /home/ubuntu/code/test.py
+```
+You need to check if the jar file is in your `/usr/local/spark/jars` folder and if the package is able to get. This package works for me now.
+3. Run the job in a distributed way:
+```
+/usr/local/spark/bin/spark-submit --master spark://ec2-34-215-118-65.us-west-2.compute.amazonaws.com:7077 --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 /home/ubuntu/code/test.py
+```
+To be able to run it on the master nodes, you need to start spark for all node?
