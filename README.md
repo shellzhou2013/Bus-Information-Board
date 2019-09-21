@@ -15,5 +15,9 @@ See [https://docs.google.com/document/d/1InLxbu-FH2nyd0NuJ3ewdvAt0Ttk_bNUwlQop38
 `peg install kafka`
 4. ssh to your master node: go to your .ssh folder directory, and run: `ssh -i "Xuhui-IAM-keypair.pem" ubuntu@ec2-34-215-118-65.us-west-2.compute.amazonaws.com`
 5. In your ec2 instance, if you run: `jps`, you can see a QuorumPeerMain job. It is related to zookeeper. Sometimes it show a job of kafka but sometimes it doesn't. 
-6. Check your kafka topics: `/usr/local/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181`
-7. 
+6. Check your kafka topics: `/usr/local/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181`. I have created a topic called hello_topic, if kafka has started, it will output "hello_topic"
+7. Create a topic: `/usr/local/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic your_topic`. You can create more relications and partitions by changing the two factors.
+8. Start a producer: `/usr/local/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic hello_topic`. Your tab is now pinned to wait anything you want to produce. (Act as a producer)
+9. In another terminal that is ssh to the master node, start a consumer: `/usr/local/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic hello_topic`. Now your tab is pinned to consume anything you produce through the producer.
+10. steps 5-9 just give you some sense of how kafka works. Now if you type anything with a return, say `hello` + return, you can see hello on both producer and consumer tabs.
+11. 
