@@ -7,5 +7,4 @@
 0. Every time you want to use pegasus, remember to do: peg fetch spark-cluster
 1. Start all the instance in spark-cluster: peg start spark-cluster
 2. Start zookeeper: peg service spark-cluster zookeeper start
-3. Start kafka: peg service spark-cluster kafka start
-sometimes 
+3. Start kafka: `peg service spark-cluster kafka start`.
