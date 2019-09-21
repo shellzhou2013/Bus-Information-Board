@@ -23,10 +23,10 @@ See [https://docs.google.com/document/d/1InLxbu-FH2nyd0NuJ3ewdvAt0Ttk_bNUwlQop38
 ### 4. Kafka-python
 0. Install kafka-python package: `pip install kafka-python`
 1. Python code directly act as a producer: 
-`
+```
 import kafka
 cluster = kafka.KafkaClient("localhost:9092")
 prod = kafka.SimpleProducer(cluster, async=False)
 topic = "hello_topic"
 prod.send_messages(topic, message_you_want_send)
-`
+```
