@@ -19,5 +19,14 @@ See [https://docs.google.com/document/d/1InLxbu-FH2nyd0NuJ3ewdvAt0Ttk_bNUwlQop38
 7. Create a topic: `/usr/local/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic your_topic`. You can create more relications and partitions by changing the two factors.
 8. Start a producer: `/usr/local/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic hello_topic`. Your tab is now pinned to wait anything you want to produce. (Act as a producer)
 9. In another terminal that is ssh to the master node, start a consumer: `/usr/local/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic hello_topic`. Now your tab is pinned to consume anything you produce through the producer.
-10. steps 5-9 just give you some sense of how kafka works. Now if you type anything with a return, say `hello` + return, you can see hello on both producer and consumer tabs.
-11. 
+10. Steps 5-9 just give you some sense of how kafka works. Now if you type anything with a return, say `hello` + return, you can see hello on both producer and consumer tabs.
+### 4. Kafka-python
+0. Install kafka-python package: `pip install kafka-python`
+1. Python code directly act as a producer: 
+`
+import kafka
+cluster = kafka.KafkaClient("localhost:9092")
+prod = kafka.SimpleProducer(cluster, async=False)
+topic = "hello_topic"
+prod.send_messages(topic, message_you_want_send)
+`
