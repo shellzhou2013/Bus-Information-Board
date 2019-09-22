@@ -57,3 +57,9 @@ peg service spark-cluster spark start
 ```
 /usr/local/spark/bin/spark-submit --master spark://ec2-34-215-118-65.us-west-2.compute.amazonaws.com:7077 --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 /home/ubuntu/code/test.py
 ```
+
+
+
+
+
+## 2. Project Idea
