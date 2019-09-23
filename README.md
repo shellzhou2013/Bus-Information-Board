@@ -81,6 +81,6 @@ conn.commit() # if you want to execute the code
 
 conn.close()
 ```
-
+8. Allow permission of database to be access by other machines: 1. 
 
 ## 2. Project Idea
