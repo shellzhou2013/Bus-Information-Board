@@ -57,8 +57,19 @@ peg service spark-cluster spark start
 ```
 /usr/local/spark/bin/spark-submit --master spark://ec2-34-215-118-65.us-west-2.compute.amazonaws.com:7077 --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 /home/ubuntu/code/test.py
 ```
-
-
+### 7. PostgreSQL
+1. Create a database cluster with only one master. I will just use EC2 ubuntu instance
+2. SSH to your node
+3. Peg install the environment: `peg install database-cluster environment`
+4. Install postgresql: 
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install build-essential
+sudo apt install postgresql postgresql-contrib
+```
+5. Install psycopg2 so that python can connect to database. For some reason, I need to install binary version: `pip install psycopg2-binary`
+6. 
 
 
 
