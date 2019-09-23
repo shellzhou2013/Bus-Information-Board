@@ -69,7 +69,7 @@ sudo apt install build-essential
 sudo apt install postgresql postgresql-contrib
 ```
 5. Install psycopg2 so that python can connect to database. For some reason, I need to install binary version: `pip install psycopg2-binary`
-6. 
+6. How to use python to interact with postgresql: see [https://www.tutorialspoint.com/postgresql/postgresql_python.htm](https://www.tutorialspoint.com/postgresql/postgresql_python.htm)
 
 
 
