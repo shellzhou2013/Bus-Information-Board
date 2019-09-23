@@ -70,7 +70,17 @@ sudo apt install postgresql postgresql-contrib
 ```
 5. Install psycopg2 so that python can connect to database. For some reason, I need to install binary version: `pip install psycopg2-binary`
 6. How to use python to interact with postgresql: see [https://www.tutorialspoint.com/postgresql/postgresql_python.htm](https://www.tutorialspoint.com/postgresql/postgresql_python.htm)
+7. Python code:
+```
+import psycopg2
+conn = psycopg2.connect(database = "test", user = "postgres", password = "test", host = "127.0.0.1", port = "5432")
+cur = conn.cursor()
+cur.execute("YOUR_SQL_CODE")
+rows = cur.fetchall() # if there are some returns
+conn.commit() # if you want to execute the code
 
+conn.close()
+```
 
 
 ## 2. Project Idea
