@@ -1,0 +1,1 @@
+/usr/local/spark/bin/spark-submit --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 /home/ubuntu/code/processing/streaming_processing.py
