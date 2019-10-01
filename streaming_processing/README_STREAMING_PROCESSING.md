@@ -29,4 +29,4 @@ Generally just follow this: [https://docs.google.com/presentation/d/1cQ_G2DWvpW4
 5. Install psycopg2 so that python can connect to database. For some reason, I need to install binary version: `pip install psycopg2-binary`. However to use it: [https://www.tutorialspoint.com/postgresql/postgresql_python.htm](https://www.tutorialspoint.com/postgresql/postgresql_python.htm)
 6. An important thing is to allow external reading and writing to your database from other instances. Follow this blog to modify .conf files: [https://blog.insightdatascience.com/simply-install-postgresql-58c1e4ebf252](https://blog.insightdatascience.com/simply-install-postgresql-58c1e4ebf252)
 ### How to run
-In your main function, you can change the micro-batch-size (currently 1 second), the zookeeper host (currently local) and topic name. To run it, under the streaming_processing folder, run `python streaming_processing.py`
+In your main function, you can change the micro-batch-size (currently 1 second), the zookeeper host (currently local) and topic name. To run it, under the streaming_processing folder, run `./run_streaming.sh`
