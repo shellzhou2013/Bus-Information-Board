@@ -30,3 +30,5 @@ Generally just follow this: [https://docs.google.com/presentation/d/1cQ_G2DWvpW4
 6. An important thing is to allow external reading and writing to your database from other instances. Follow this blog to modify .conf files: [https://blog.insightdatascience.com/simply-install-postgresql-58c1e4ebf252](https://blog.insightdatascience.com/simply-install-postgresql-58c1e4ebf252)
 ### How to run
 In your main function, you can change the micro-batch-size (currently 1 second), the zookeeper host (currently local) and topic name. To run it, under the streaming_processing folder, run `./run_streaming.sh`
+
+Before running it, don't forget to install the required packages on your workers such as **psycopg2!!!**
