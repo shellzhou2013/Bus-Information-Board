@@ -7,7 +7,7 @@ To simulate the historical data to look like streaming data. My data is sorted w
 1. Start all the instance in spark-cluster: `peg start spark-cluster`
 2. Start zookeeper: `peg service spark-cluster zookeeper start`
 3. Start kafka: `peg service spark-cluster kafka start`. 
-4. ssh to your master node: go to your .ssh folder directory, and run: `ssh -i "Xuhui-IAM-keypair.pem" ubuntu@ec2-34-215-118-65.us-west-2.compute.amazonaws.com`
+4. ssh to your master node: go to your .ssh folder directory, and run: `ssh -i "Xuhui-IAM-keypair.pem" ubuntu@ec2-***-***-***-**.us-west-2.compute.amazonaws.com`
 5. In your ec2 instance, if you run: `jps`, you can see a QuorumPeerMain job. It is related to zookeeper. Sometimes it show a job of kafka but sometimes it doesn't. 
 6. Check your kafka topics: `/usr/local/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181`. I have created a topic called hello_topic, if kafka has started, it will output "hello_topic"
 7. Create a topic: `/usr/local/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic your_topic`. You can create more relications and partitions by changing the two factors.
