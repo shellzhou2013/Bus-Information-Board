@@ -1,6 +1,6 @@
 ## Streaming processing
 ### Spark
-1. Start spark: on your local machine, run: `peg service spark-cluster hadoop start` and `peg service spark-cluster spark start`. By doing these, you can see your spark UI at: [http://ec2-34-215-118-65.us-west-2.compute.amazonaws.com:8080/](http://ec2-34-215-118-65.us-west-2.compute.amazonaws.com:8080/)
+1. Start spark: on your local machine, run: `peg service spark-cluster hadoop start` and `peg service spark-cluster spark start`. By doing these, you can see your spark UI at: http://ec2-***-***-***-**.us-west-2.compute.amazonaws.com:8080/
 2. Install pyspark: `pip install pyspark`. For more tutorial about spark, see [https://github.com/InsightDataScience/data-engineering-ecosystem/wiki/spark-intro](https://github.com/InsightDataScience/data-engineering-ecosystem/wiki/spark-intro)
 3. Before running the spark streaming job: you need to check if the jar file is in your `/usr/local/spark/jars` folder and if the spark streaming kafka package is able to get. This package works for me now.
 4. Run the spark job locally:
@@ -9,7 +9,7 @@
 ```
 5. Run the job in a distributed way:
 ```
-/usr/local/spark/bin/spark-submit --master spark://ec2-34-215-118-65.us-west-2.compute.amazonaws.com:7077 --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 your_file.py
+/usr/local/spark/bin/spark-submit --master spark://ec2-***-***-***-***.us-west-2.compute.amazonaws.com:7077 --jars /usr/local/spark/jars/spark-streaming_2.11-2.4.0.jar --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.3 your_file.py
 ```
 ### Kafka ingestion
 1. run the ingestion, then the spark streaming job is going to process the signals.
