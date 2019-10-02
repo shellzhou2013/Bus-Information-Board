@@ -1,4 +1,4 @@
-# version 4
+# version 5: add confidential
 '''
 set the speed of bus with 10 m/s
 set the maximum distance you want to walk 
@@ -13,6 +13,8 @@ import datetime
 import time
 import pandas as pd
 import math
+
+from confidential_streaming import get_confidential
 
 def arrival_information_for_stop(stop_id):
     '''
@@ -31,10 +33,12 @@ def arrival_information_for_stop(stop_id):
     if len(stop_id) != 6 or not unicode(stop_id, 'utf-8').isnumeric():
         return "The stop ID you type is incorrect. Please try again!"
     
+    database_password = get_confidential('database_password')
+    database_host = get_confidential('database_host')
     conn = psycopg2.connect(database = "test", 
                             user = "postgres", 
-                            password = "test", 
-                            host = "ec2-35-165-109-193.us-west-2.compute.amazonaws.com", 
+                            password = database_password, 
+                            host = database_host, 
                             port = "5432")
     cur = conn.cursor()
     
@@ -99,10 +103,12 @@ def find_nearby_stops(stop_id, length = MAX_WALK_LENGTH):
     find all the stops within a square that the current stop is the center
     and the side of the square is 2 x length
     '''
+    database_password = get_confidential('database_password')
+    database_host = get_confidential('database_host')
     conn = psycopg2.connect(database = "test", 
                             user = "postgres", 
-                            password = "test", 
-                            host = "ec2-35-165-109-193.us-west-2.compute.amazonaws.com", 
+                            password = database_password, 
+                            host = database_host, 
                             port = "5432")
     cur = conn.cursor()
     cur.execute("SELECT STOP_LAT, STOP_LON FROM STOP_INFORMATION WHERE STOP_ID = '%s';" %stop_id)
@@ -148,35 +154,3 @@ def combine_output(stop_id, length = MAX_WALK_LENGTH):
     for nearby_stop in nearby_stop_list:
         current_stop_string += '#################' + arrival_information_for_stop(nearby_stop)
     return current_stop_string
-##################################################################################################
-##################################################################################################
-##################################################################################################
-##################################################################################################
-
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-from dash.dependencies import Input, Output
-
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-app.layout = html.Div([
-    dcc.Input(id='my-id', value='6 digits:', type='text'),
-    html.Div(id='my-div')
-])
-
-
-@app.callback(
-    Output(component_id='my-div', component_property='children'),
-    [Input(component_id='my-id', component_property='value')]
-)
-
-
-def update_output_div(input_value):
-    return '"{}"'.format(combine_output(str(input_value)))
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True, host= '0.0.0.0')
