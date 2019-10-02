@@ -1,11 +1,11 @@
-# version 3
+# version 4: hide the confidential
 import pandas as pd
 
 def str_to_min(time_str):
     '''
-        @imput (string): the time in string in format of hh:mm:ss
-        @output (float): the time of float with unit of minute
-        '''
+    @imput (string): the time in string in format of hh:mm:ss
+    @output (float): the time of float with unit of minute
+    '''
     hour, minute, second = time_str.split(':')
     return int(hour) * 60.0 + int(minute) * 1.0 + int(second) / 60.0
 
@@ -13,15 +13,15 @@ def str_to_min(time_str):
 
 def get_schedule_time(file_directory):
     '''
-        @input (string): the file directory where the schedule information is
-        @output: None
-        @function: this function is to calculate the schedule time for each trip_id.
+    @input (string): the file directory where the schedule information is
+    @output: None
+    @function: this function is to calculate the schedule time for each trip_id.
         for each stop_id in each trip_id, the scheduled time from beginning to
         this stop is calculated and saved in a temporary output file.
         the reason to calculate this is, the streaming signal only has the next
         stop the bus will arrive. So we need this information to get the time
         period from that next stop to any stop in this trip id
-        '''
+    '''
     df = pd.read_csv(file_directory)
     df = df[['trip_id', 'departure_time', 'stop_id']]
     df['scheduled_time'] = df['departure_time'].apply(str_to_min)
@@ -47,6 +47,6 @@ def get_schedule_time(file_directory):
     df_schedule.to_csv('../output/schedule_information_new.csv')
 
 
-
+    
 file_directory = '../input/stop_times.txt'
 get_schedule_time(file_directory)  
