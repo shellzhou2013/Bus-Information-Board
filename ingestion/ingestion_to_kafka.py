@@ -1,3 +1,4 @@
+# version 3
 import datetime
 import time
 import sys
@@ -81,6 +82,6 @@ def simulate_real_time_data(total_running_time, file_dir, kafka_url, kafka_topic
     # close the file
     f.close()
 def main():
-    simulate_real_time_data('2000', '../input/MTA-Bus-Time_.2014-08-01.txt', 'localhost:9092', 'hello_topic')
+    simulate_real_time_data('2000', '../input/MTA-Bus-Time_.2014-08-01.txt', 'localhost:9092', 'bus_topic')
 
 main()
