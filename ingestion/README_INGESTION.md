@@ -30,12 +30,12 @@ For more information, see [https://github.com/dpkp/kafka-python](https://github.
 ### How to run ingestion:
 In the main directory, run: `./run.sh`. You can modify the time you want to run. It's in seconds. Also you may want to run it on another topic, just change the "hello_topic" to any topic(s) you want to use. 
 
-### Will launch more about how to run kafka in a distributed way...
 
 
 ### Kafka-cluster
 1. Follow [https://github.com/InsightDataScience/pegasus](https://github.com/InsightDataScience/pegasus) to create your kafka-cluster.
 2. Also: `peg install kafka-cluster environment` and `pip install kafka-python`
 3. Create a topic: `/usr/local/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 3 --topic bus_topic`
+4. Note, now the ingestion of data is running on kafka master node.
 
 
