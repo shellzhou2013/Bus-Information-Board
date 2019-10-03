@@ -11,9 +11,13 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     dcc.Input(id='my-id', value='6 digits:', type='text'),
+    html.Hr(),
     html.Div(id='my-div0'),
+    html.Hr(),
     html.Div(id='my-div1'),
+    html.Hr(),
     html.Div(id='my-div2'),
+    html.Hr(),
     html.Div(id='my-div3')
 ])
 
