@@ -1,4 +1,4 @@
-# version 6: select only recent 1 minute's signals to process
+# version 6: select only recent half minute's signals to process
 '''
 set the speed of bus with 10 m/s
 set the maximum distance you want to walk 
@@ -73,13 +73,13 @@ def get_arrival_information_for_stop(stop_id):
     FROM SCHEDULE_INFORMATION WHERE STOP_ID = '%s';
     ''' % stop_id)
     
-    # step 2, need to be updated
-    a_minute_ago = datetime.datetime.now() - datetime.timedelta(0, 60, 0)
+    # step 2
+    half_minute_ago = datetime.datetime.now() - datetime.timedelta(0, 30, 0)
     cur.execute('''DROP TABLE IF EXISTS RECENT_RECORD;
                    SELECT * INTO RECENT_RECORD 
                    FROM RECORD 
                    WHERE TIME_STAMP >= TIMESTAMP'%s';
-                '''% a_minute_ago)
+                '''% half_minute_ago)
     conn.commit()
     
     # step 3
