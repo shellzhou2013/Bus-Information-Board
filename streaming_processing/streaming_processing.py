@@ -10,6 +10,9 @@ from pyspark.sql import SparkSession
 
 from confidential_streaming import get_confidential
 
+database_password = get_confidential('database_password')
+database_host = get_confidential('database_host')
+zookeeper_port = get_confidential('zookeeper_port')
 
 def initialize_database():
     '''
@@ -19,8 +22,6 @@ def initialize_database():
         everytime we can create a new "RECORD" table to store qualified data
     '''
     # delect the "record" table if it exists
-    database_password = get_confidential('database_password')
-    database_host = get_confidential('database_host')
     conn = psycopg2.connect(database = "test", 
                             user = "postgres", 
                             password = database_password, 
@@ -52,8 +53,6 @@ def sendPartition(iterater):
         this function is used as the function in foreachRDD method. 
         it helps writing all the rdds at a micro batch in a partition to the database
     '''
-    database_password = get_confidential('database_password')
-    database_host = get_confidential('database_host')
     conn = psycopg2.connect(database = "test", 
                             user = "postgres", 
                             password = database_password, 
@@ -128,6 +127,5 @@ def spark_streaming_processing(batch_size, zookeeper_port, topic):
 def main():
     initialize_database()
     # now the zookeeper host should be on the kafka master node and the topic is bus_topic
-    zookeeper_port = get_confidential('zookeeper_port')
     spark_streaming_processing(1, zookeeper_port, "bus_topic")
 main()
