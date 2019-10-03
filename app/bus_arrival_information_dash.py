@@ -1,4 +1,4 @@
-# version 5: add confidential
+# version 6: select only recent 1 minute's signals to process
 '''
 set the speed of bus with 10 m/s
 set the maximum distance you want to walk 
@@ -14,9 +14,35 @@ import time
 import pandas as pd
 import math
 
-from confidential_streaming import get_confidential
+from confidential_app import get_confidential
 
-def arrival_information_for_stop(stop_id):
+
+def get_stop_name(stop_id):
+    '''
+    @input (string): stop id
+    @output (string): information about the stop name
+    '''
+    if len(stop_id) != 6 or not unicode(stop_id, 'utf-8').isnumeric():
+        return "The stop ID you type is incorrect. Please type a 6-digit number!"
+    
+    database_password = get_confidential('database_password')
+    database_host = get_confidential('database_host')
+    conn = psycopg2.connect(database = "test", 
+                            user = "postgres", 
+                            password = database_password, 
+                            host = database_host, 
+                            port = "5432")
+    cur = conn.cursor()
+    cur.execute('''
+    SELECT * FROM STOP_INFORMATION WHERE STOP_ID = '%s';
+    ''' % stop_id)
+    temp = cur.fetchall()
+    if len(temp) == 0:
+        return 'The stop id could not be found'
+    return 'The stop you searched is: ' + temp[0][1]
+    
+    
+def get_arrival_information_for_stop(stop_id):
     '''
     @input (string): stop id you want to get information about
     @output (string): arrival information for this stop
@@ -30,8 +56,6 @@ def arrival_information_for_stop(stop_id):
         4. process each related signals to get the arrival information
             and put them together
     '''
-    if len(stop_id) != 6 or not unicode(stop_id, 'utf-8').isnumeric():
-        return "The stop ID you type is incorrect. Please try again!"
     
     database_password = get_confidential('database_password')
     database_host = get_confidential('database_host')
@@ -50,11 +74,12 @@ def arrival_information_for_stop(stop_id):
     ''' % stop_id)
     
     # step 2, need to be updated
-    cur.execute('''
-    DROP TABLE IF EXISTS RECENT_RECORD;
-    SELECT * INTO RECENT_RECORD
-    FROM RECORD;
-    ''')
+    a_minute_ago = datetime.datetime.now() - datetime.timedelta(30, 60, 0)
+    cur.execute('''DROP TABLE IF EXISTS RECENT_RECORD;
+                   SELECT * INTO RECENT_RECORD 
+                   FROM RECORD 
+                   WHERE TIME_STAMP >= TIMESTAMP'%s';
+                '''% a_minute_ago)
     conn.commit()
     
     # step 3
@@ -95,7 +120,7 @@ def arrival_information_for_stop(stop_id):
         return "Currently there is no bus arriving!"
     # join them with '\n', this is for DASH application
     else:
-        return '***********************'.join(schedule_list)
+        return '***'.join(schedule_list)
 
 def find_nearby_stops(stop_id, length = MAX_WALK_LENGTH):
     '''
@@ -128,15 +153,16 @@ def find_nearby_stops(stop_id, length = MAX_WALK_LENGTH):
     longitude_interval_left, longitude_interval_right = \
                                 longitude - delta_longitude, longitude + delta_longitude
     
-    print(latitude_interval_left, latitude_interval_right)
-    print(longitude_interval_left, longitude_interval_right)
+    #print(latitude_interval_left, latitude_interval_right)
+    #print(longitude_interval_left, longitude_interval_right)
     
     cur.execute('''
-    SELECT STOP_ID 
+    SELECT STOP_ID, STOP_NAME 
     FROM STOP_INFORMATION 
     WHERE STOP_LAT > %s AND STOP_LAT < %s AND STOP_LON > %s AND STOP_LON < %s
     ''', (latitude_interval_left, latitude_interval_right, 
          longitude_interval_left, longitude_interval_right))
+    
     nearby_stops = []
     temp = cur.fetchall()
     for nearby_stop_id in temp:
@@ -146,11 +172,11 @@ def find_nearby_stops(stop_id, length = MAX_WALK_LENGTH):
     conn.close()
     return nearby_stops
 
-def combine_output(stop_id, length = MAX_WALK_LENGTH):
-    current_stop_string = arrival_information_for_stop(stop_id)
-    nearby_stop_list = find_nearby_stops(stop_id, length = MAX_WALK_LENGTH)
-    if len(nearby_stop_list) == 0:
-        return current_stop_string
-    for nearby_stop in nearby_stop_list:
-        current_stop_string += '#################' + arrival_information_for_stop(nearby_stop)
-    return current_stop_string
+def combine_nearby_stop_information(stop_id):
+    nearby_stops = find_nearby_stops(stop_id)
+    if len(nearby_stops) == 0:
+        return ''
+    ans = []
+    for stop in nearby_stops:
+        ans.append('Information for stop ' + stop + ': ' + get_arrival_information_for_stop(stop))
+    return '################'.join(ans)
