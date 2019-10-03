@@ -74,7 +74,7 @@ def get_arrival_information_for_stop(stop_id):
     ''' % stop_id)
     
     # step 2, need to be updated
-    a_minute_ago = datetime.datetime.now() - datetime.timedelta(30, 60, 0)
+    a_minute_ago = datetime.datetime.now() - datetime.timedelta(0, 60, 0)
     cur.execute('''DROP TABLE IF EXISTS RECENT_RECORD;
                    SELECT * INTO RECENT_RECORD 
                    FROM RECORD 
