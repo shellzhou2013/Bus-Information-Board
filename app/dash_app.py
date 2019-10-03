@@ -26,7 +26,7 @@ app.layout = html.Div([
     [Input(component_id='my-id', component_property='value')]
 )
 def stop_name(input_value):
-    return get_stop_name(str(input_value))
+    return 'The stop you searched is: ' + get_stop_name(str(input_value))
 
 
 @app.callback(
@@ -42,6 +42,11 @@ def arrival_information(input_value):
 )
 def nearby_stops(input_value):
     temp = find_nearby_stops(str(input_value))
+    # add stop name to the stop id
+    for i in range(len(temp)):
+        temp[i] += ' ' + get_stop_name(temp[i])
+    
+    
     info = ''
     if len(temp) == 0:
         info = 'No nearby stops!'
