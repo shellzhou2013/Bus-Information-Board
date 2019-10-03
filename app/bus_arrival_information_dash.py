@@ -39,7 +39,7 @@ def get_stop_name(stop_id):
     temp = cur.fetchall()
     if len(temp) == 0:
         return 'The stop id could not be found'
-    return 'The stop you searched is: ' + temp[0][1]
+    return temp[0][1]
     
     
 def get_arrival_information_for_stop(stop_id):
