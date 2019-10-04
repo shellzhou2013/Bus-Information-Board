@@ -2,7 +2,7 @@
 ## 0. Environment setup
 Please see the readme of each sub folder.
 ## 1. Introduction
-Project Slides[Click here](https://docs.google.com/presentation/d/1-u91-LjLQ5AKjXK2u0C_ptJ3Dxi05Ltw2ljXOGpBAI0/edit#slide=id.g62b6dc40be_0_54)
+Project Slides: [Click here](https://docs.google.com/presentation/d/1-u91-LjLQ5AKjXK2u0C_ptJ3Dxi05Ltw2ljXOGpBAI0/edit#slide=id.g62b6dc40be_0_54)
 
 Based on a survey from UC Berkeley, the top 3 reasons that people give up public transportations are related to not access to bus arrival information. A typical case is that, there are two nearby stops both having routes to your destination. If you know the bus arrival information for the bus stop you are at as well as nearby stops, you can arrange your trip more easily.
 
@@ -16,3 +16,8 @@ Bus schedule and stop information: [https://transitfeeds.com/p/mta](https://tran
 ## 3. Pipeline
 
 ![Image description](https://github.com/shellzhou2013/When-Next-Bus-Coming/blob/master/images/pipeline.png)
+
+## 4. Engineering challenge
+Coming soon
+## 5. Web UI
+Coming soon
