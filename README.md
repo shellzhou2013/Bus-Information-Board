@@ -2,6 +2,8 @@
 ## 0. Environment setup
 Please see the readme of each sub folder.
 ## 1. Introduction
+Project Slides[](https://docs.google.com/presentation/d/1-u91-LjLQ5AKjXK2u0C_ptJ3Dxi05Ltw2ljXOGpBAI0/edit#slide=id.g62b6dc40be_0_54)
+
 Based on a survey from UC Berkeley, the top 3 reasons that people give up public transportations are related to not access to bus arrival information. A typical case is that, there are two nearby stops both having routes to your destination. If you know the bus arrival information for the bus stop you are at as well as nearby stops, you can arrange your trip more easily.
 
 In this project, I build a streaming pipeline to provide transparency of bus arrival information for passengers, which will help to rebuild their confidence on public transportations.
