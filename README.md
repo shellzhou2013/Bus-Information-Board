@@ -18,6 +18,8 @@ Bus schedule and stop information: [https://transitfeeds.com/p/mta](https://tran
 ![Image description](https://github.com/shellzhou2013/When-Next-Bus-Coming/blob/master/images/pipeline.png)
 
 ## 4. Engineering challenge
-Coming soon
+In the spark streaming job, we need to write records to database. If we create a connection to database for each record, it will be very slow. Here it gives the latency for my streaming jobs by using foreachrdd method to create connection to database at normal ingestion rate and 10 x ingestion rate:
+![Image description](https://github.com/shellzhou2013/When-Next-Bus-Coming/blob/master/images/foreachrdd_normal.png)
+![Image description](https://github.com/shellzhou2013/When-Next-Bus-Coming/blob/master/images/foreachrdd_10x.png)
 ## 5. Web UI
 Coming soon
