@@ -27,7 +27,11 @@ To solve this problem, instead of using foreachrdd, I used a foreach partiton me
 ![Image description](https://github.com/shellzhou2013/When-Next-Bus-Coming/blob/master/images/foreachpartition_normal.png)
 ![Image description](https://github.com/shellzhou2013/When-Next-Bus-Coming/blob/master/images/foreachpartition_10x.png)
 ![Image description](https://github.com/shellzhou2013/When-Next-Bus-Coming/blob/master/images/foreachpartition_50x.png)
-The latency is 80 ms vs 180 ms with foreachrdd. When with a 50 x ingestion rate, which is ~1300 records/sec, it reaches to ~200 ms, but the streaming job still works well.
+The latency is 80 ms vs 280 ms with foreachrdd. When with a 50 x ingestion rate, which is ~1300 records/sec, it reaches to ~200 ms, but the streaming job still works well.
 ## 5. Web UI
 This is my web UI run at my domain: [http://www.kafkastreampipeline.xyz/](http://www.kafkastreampipeline.xyz/)
 ![Image description](https://github.com/shellzhou2013/When-Next-Bus-Coming/blob/master/images/demo_screenshot.png)
+
+In this DASH application, if you type in a 6-digit stop id of NYC, it gives you the stop name, the arrival information for this stop, its nearby stops as well as the arrival information for nearby stops.
+
+With those information, you can easily make a desicion. For example, you having a route 10 at this stop will arrive in 20 min, and you having route 20 that you can take at a nearby stop will arrive in 5 min, you sure you can walk there in 5 min, then probably you will walk to that stop to take route 20.
